@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { RestService } from './services/rest';
+import {CreativeFields} from './models/creative.fields';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,9 @@ import { RestService } from './services/rest';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Behance';
+  title:String = 'Behance';
+
+  creativeFields: CreativeFields[];
 
   constructor(private rest: RestService){}
 
@@ -16,7 +19,9 @@ export class AppComponent {
     this.rest
       .getCreativeFields()
       .subscribe(data => {
-        console.log(data);
+        if (data) {
+          this.creativeFields = data.fields;
+        }
       });
   }
 

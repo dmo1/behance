@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 import { RestService } from './services/rest';
-
+import { APICacheService } from './services/api.cache';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,8 @@ import { RestService } from './services/rest';
     HttpClientModule
   ],
   providers: [
-    RestService
+    RestService,
+    APICacheService
   ],
   bootstrap: [AppComponent]
 })
