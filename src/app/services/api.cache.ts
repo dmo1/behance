@@ -56,8 +56,10 @@ export class APICacheService {
 
   getItem(key: string): Observable<any> {
     return new Observable(observer => {
-        let val = this.cacheItems.get(key);
-        observer.next(val);
+        const item = this.cacheItems.get(key);
+        const itemData = item.data;
+
+        observer.next(itemData);
         observer.complete();
     });
   }
