@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { APICacheService } from '../services/api.cache';
 import {CreativeFields} from '../models/creative.fields';
 import {config} from '../config/config';
 
@@ -15,27 +14,11 @@ export class RestService {
   private PROJECTS_PATH = `${this.API_PATH}projects?client_id=${config.clientId}`;
 
   constructor(
-    private http: HttpClient,
-    private cache: APICacheService
+    private http: HttpClient
   ) {}
 
   getAPIResource(url: string): Observable<any> {
-    if (this.cache.isCached(url)) {
-
-      return this.cache.getItem(url);
-    } else {
-      let apiObservable: Observable<any> = this.http.get(url);
-      let flatValue;
-
-      apiObservable
-        .map(res => res)
-        .subscribe(data => {
-          flatValue = data;
-          this.cache.addItem(url, flatValue);
-      });
-
-      return apiObservable;
-    }
+      return this.http.get(url);
   }
 
   getCreativeFields(): Observable<any> {
