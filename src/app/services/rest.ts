@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import {CreativeFields} from '../models/creative.fields';
 import {config} from '../config/config';
 
 @Injectable()

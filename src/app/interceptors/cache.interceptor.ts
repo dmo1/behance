@@ -8,6 +8,8 @@ import {APICacheService} from "../services/api.cache";
 @Injectable()
 export class CacheInterceptor implements HttpInterceptor {
 
+  constructor(private cache: APICacheService) {}
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     console.log(req);
@@ -17,8 +19,10 @@ export class CacheInterceptor implements HttpInterceptor {
     }
 
     if (this.cache.isCached(req.url)) {
+      console.log("is cached");
       return this.cache.getItem(req.url);
     } else {
+      console.log("not cached");
       return next.handle(req)
         .do(event => {
           if (event instanceof HttpResponse) {
@@ -27,6 +31,4 @@ export class CacheInterceptor implements HttpInterceptor {
         });
     }
   }
-
-  constructor(private cache: APICacheService) {}
 }

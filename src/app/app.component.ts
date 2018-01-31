@@ -9,7 +9,7 @@ import {CreativeFields} from './models/creative.fields';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title:String = 'Behance';
+  title: String = 'Behance';
 
   creativeFields: CreativeFields[];
 
